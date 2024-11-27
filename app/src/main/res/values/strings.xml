@@ -20,6 +20,7 @@
     <string name="text_button_sign_in_register_fragment">Entrar</string>
     <string name="text_email_empty_register_fragment">Digite um e-mail válido</string>
     <string name="text_password_empty_register_fragment">Digite uma senha</string>
+    <string name="txt_divider">Ou continue com</string>
 
     <!--    LoginFragment-->
     <string name="title_login_fragment">Faça login na sua conta</string>
@@ -33,4 +34,5 @@
     <string name="title_forgot_fragment">Crie sua nova senha</string>
     <string name="text_hint_edit_email_forgot_fragment">Email</string>
     <string name="text_button_forgot_fragment">Recuperar conta</string>
+    <string name="txt_or">Ou</string>
 </resources>
