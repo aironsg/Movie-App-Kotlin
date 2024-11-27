@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "738483642836",
+    "project_id": "movie-app-kotlin-af0f7",
+    "storage_bucket": "movie-app-kotlin-af0f7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738483642836:android:aae1a35b2a3eb3d6623641",
+        "android_client_info": {
+          "package_name": "br.com.dev.airon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFFXHpQ6I8dSJldamFC6OlRiq41VMK944"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
