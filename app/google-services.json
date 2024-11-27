@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:738483642836:android:aae1a35b2a3eb3d6623641",
         "android_client_info": {
-          "package_name": "br.com.dev.airon"
+          "package_name": "dev.airon.movieapp"
         }
       },
       "oauth_client": [],
