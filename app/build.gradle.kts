@@ -47,6 +47,9 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
+    //Splash API
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
     //Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
