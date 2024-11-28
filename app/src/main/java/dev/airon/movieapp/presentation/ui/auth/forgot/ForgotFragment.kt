@@ -1,11 +1,10 @@
-package dev.airon.movieapp.presentation.ui.auth
+package dev.airon.movieapp.presentation.ui.auth.forgot
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.FragmentForgotBinding
 
 

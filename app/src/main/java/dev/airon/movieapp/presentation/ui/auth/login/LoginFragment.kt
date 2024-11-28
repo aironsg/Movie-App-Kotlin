@@ -1,24 +1,22 @@
-package dev.airon.movieapp.presentation.ui.auth
+package dev.airon.movieapp.presentation.ui.auth.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.FragmentLoginBinding
-import dev.airon.movieapp.databinding.FragmentRegisterBinding
 
 
-class RegisterFragment : Fragment() {
-    private var _binding: FragmentRegisterBinding? = null
+class LoginFragment : Fragment() {
+    private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentRegisterBinding.inflate(inflater,container,false)
+        _binding = FragmentLoginBinding.inflate(inflater,container,false)
         return binding.root
     }
 

@@ -16,6 +16,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="border_button">#E2E2E2</color>
     <color name="home_register">#848383</color>
-    <color name="color_edit_register">#DAD7D7</color>
+    <color name="color_edit_register">#F1F1F1</color>
     <color name="color_text_register">#212121</color>
 </resources>
