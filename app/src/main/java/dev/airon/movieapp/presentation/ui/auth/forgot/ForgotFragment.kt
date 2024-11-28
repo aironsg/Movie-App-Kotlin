@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import dev.airon.movieapp.databinding.FragmentForgotBinding
 
-
+@AndroidEntryPoint
 class ForgotFragment : Fragment() {
 
     private var _binding: FragmentForgotBinding? = null
