@@ -95,17 +95,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--        Button SignUp-->
+
+        <!--        Divider-->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_register"
             style="@style/ThemePrimaryButton"
             android:layout_marginTop="32dp"
             android:text="@string/text_button_sign_up_register_fragment"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/input_password" />
 
-        <!--        Divider-->
         <LinearLayout
             android:id="@+id/linear_divider"
             android:layout_width="match_parent"
@@ -116,7 +116,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_login">
+            app:layout_constraintTop_toBottomOf="@+id/btn_register">
 
             <View
                 android:layout_width="match_parent"
