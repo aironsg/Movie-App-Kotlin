@@ -22,6 +22,7 @@ import dev.airon.movieapp.utils.StateView
 import dev.airon.movieapp.utils.hideKeyboard
 import dev.airon.movieapp.utils.initToolbar
 import dev.airon.movieapp.utils.isValidEmail
+import dev.airon.movieapp.utils.setupKeyboardDismissal
 
 @AndroidEntryPoint
 class ForgotFragment : Fragment() {
@@ -38,30 +39,19 @@ class ForgotFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar(binding.toolbar)
+        view.setupKeyboardDismissal(this)
         initListener()
 
-        view.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                val currentFocusView = activity?.currentFocus
-                if (currentFocusView is EditText) {
-                    val outRect = Rect()
-                    currentFocusView.getGlobalVisibleRect(outRect)
-                    if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                        currentFocusView.clearFocus()
-                        hideKeyboard()
-                    }
-                }
-            }
-            false
-        }
     }
+
 
     private fun initListener() {
         binding.btnSend.setOnClickListener {
+            hideKeyboard()
             validateData()
         }
         Glide.with(requireContext()).load(R.drawable.loading).into(binding.progressBar)
@@ -69,15 +59,18 @@ class ForgotFragment : Fragment() {
 
     private fun validateData() {
 
+        val email = binding.editEmail.text.toString().trim()
         binding.editEmail.setOnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
-                val email = binding.editEmail.text.toString().trim()
-                if (email.isValidEmail()){
-                    forgot(email)
-                }else{
-                    binding.editEmail.error = "Formato de e-mail inválido"
-                }
+                binding.root.clearFocus()
+                hideKeyboard()
             }
+        }
+        hideKeyboard()
+        if (email.isValidEmail() && email.isNotEmpty()) {
+            forgot(email)
+        } else {
+            binding.editEmail.error = "Formato de e-mail inválido"
         }
 
 
@@ -92,7 +85,11 @@ class ForgotFragment : Fragment() {
 
                 is StateView.Success -> {
                     binding.progressBar.isVisible = false
-                    //TODO: navegar para tela LOGIN
+                    Toast.makeText(
+                        requireContext(),
+                        "email enviando com sucesso",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
                 is StateView.Error -> {

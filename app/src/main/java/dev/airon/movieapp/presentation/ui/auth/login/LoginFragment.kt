@@ -15,6 +15,10 @@ import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.FragmentLoginBinding
 import dev.airon.movieapp.presentation.viewmodel.login.LoginViewModel
 import dev.airon.movieapp.utils.StateView
+import dev.airon.movieapp.utils.hideKeyboard
+import dev.airon.movieapp.utils.isValidEmail
+import dev.airon.movieapp.utils.isValidPassword
+import dev.airon.movieapp.utils.setupKeyboardDismissal
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -32,11 +36,13 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view.setupKeyboardDismissal(this)
         initListener()
     }
 
     private fun initListener() {
         binding.btnLogin.setOnClickListener {
+            hideKeyboard()
             validateData()
         }
 
@@ -46,14 +52,32 @@ class LoginFragment : Fragment() {
     private fun validateData() {
         val email = binding.editEmail.text.toString().trim()
         val password = binding.edtPassword.text.toString()
-        if (email.isNotEmpty()) {
-            if (password.isNotEmpty()) {
-                login(email, password)
-            }else{
-                Toast.makeText(requireContext(), "Preencha a senha", Toast.LENGTH_SHORT).show()
+        binding.editEmail.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                binding.root.clearFocus()
+                hideKeyboard()
             }
-        }else{
-            Toast.makeText(requireContext(), "Preencha o email", Toast.LENGTH_SHORT).show()
+        }
+        binding.edtPassword.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                binding.root.clearFocus()
+                hideKeyboard()
+            }
+        }
+
+        if (email.isNotEmpty() && email.isValidEmail()) {
+            if (password.isNotEmpty() && password.isValidPassword()) {
+                login(email, password)
+            } else {
+                Toast.makeText(requireContext(), "formato de senha inválido", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        } else {
+            Toast.makeText(
+                requireContext(),
+                "formato de email inválido ou campo de email vazio",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 

@@ -1,14 +1,11 @@
 package dev.airon.movieapp.presentation.viewmodel.register
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.airon.movieapp.domain.usecase.auth.RegisterUseCase
 import dev.airon.movieapp.utils.StateView
 import kotlinx.coroutines.Dispatchers
-
-
 import javax.inject.Inject
 
 @HiltViewModel
