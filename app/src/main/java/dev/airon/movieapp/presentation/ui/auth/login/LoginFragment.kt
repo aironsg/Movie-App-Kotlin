@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
+import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.FragmentLoginBinding
 import dev.airon.movieapp.presentation.viewmodel.login.LoginViewModel
 import dev.airon.movieapp.utils.StateView
@@ -35,8 +38,9 @@ class LoginFragment : Fragment() {
     private fun initListener() {
         binding.btnLogin.setOnClickListener {
             validateData()
-
         }
+
+        Glide.with(requireContext()).load(R.drawable.loading).into(binding.progressBar)
     }
 
     private fun validateData() {
@@ -58,16 +62,16 @@ class LoginFragment : Fragment() {
         loginViewModel.login(email, password).observe(viewLifecycleOwner) { stateView ->
             when (stateView) {
                 is StateView.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.isVisible = true
                 }
 
                 is StateView.Success -> {
-                    binding.progressBar.visibility = View.INVISIBLE
+                    binding.progressBar.isVisible = false
                     //TODO: navegar para tela HOME
                 }
 
                 is StateView.Error -> {
-                    binding.progressBar.visibility = View.INVISIBLE
+                    binding.progressBar.isVisible = false
                     Toast.makeText(requireContext(), stateView.message, Toast.LENGTH_SHORT).show()
                 }
             }
