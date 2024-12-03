@@ -173,6 +173,7 @@
                android:textColor="@color/home_register" />
 
            <TextView
+               android:id="@+id/btn_register"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_marginStart="8dp"

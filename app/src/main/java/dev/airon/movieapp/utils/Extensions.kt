@@ -7,10 +7,11 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import dev.airon.movieapp.R
 
 //botão de retorno na toolbar
@@ -19,10 +20,23 @@ fun Fragment.initToolbar(toolbar: Toolbar, homeAsUpEnabled: Boolean = true) {
     (activity as AppCompatActivity).title = ""
     (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
     (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(homeAsUpEnabled)
+
+    // Configura o comportamento do botão de "voltar" no Toolbar
     toolbar.setNavigationOnClickListener {
-        activity?.onBackPressed()
+        findNavController().navigateUp() // Usa a navegação do Navigation Component
     }
+
+    // Configura o comportamento do botão de "voltar" de hardware (tecla "back")
+    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (!findNavController().navigateUp()) {
+                // Se não for possível navegar para o fragmento anterior, permite o comportamento padrão
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
+        }
+    })
 }
+
 
 //fechar teclado quando clicar fora
 fun Fragment.hideKeyboard() {

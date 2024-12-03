@@ -53,13 +53,13 @@ class RegisterFragment : Fragment() {
         val email = binding.editEmail.text.toString().trim()
         val password = binding.edtPassword.text.toString()
 
-        binding.editEmail.setOnFocusChangeListener { v, hasFocus ->
+        binding.editEmail.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 binding.root.clearFocus()
                 hideKeyboard()
             }
         }
-        binding.edtPassword.setOnFocusChangeListener { v, hasFocus ->
+        binding.edtPassword.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 binding.root.clearFocus()
                 hideKeyboard()
@@ -96,7 +96,7 @@ class RegisterFragment : Fragment() {
                         "Usuario cadastrado com sucesso!",
                         Toast.LENGTH_SHORT
                     ).show()
-                    // TODO: navegar para tela HOME
+
                 }
 
                 is StateView.Error -> {

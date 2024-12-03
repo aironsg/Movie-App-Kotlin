@@ -1,19 +1,14 @@
 package dev.airon.movieapp.presentation.ui.auth.forgot
 
-import android.annotation.SuppressLint
-import android.graphics.Rect
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.FragmentForgotBinding
@@ -60,7 +55,7 @@ class ForgotFragment : Fragment() {
     private fun validateData() {
 
         val email = binding.editEmail.text.toString().trim()
-        binding.editEmail.setOnFocusChangeListener { v, hasFocus ->
+        binding.editEmail.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 binding.root.clearFocus()
                 hideKeyboard()
