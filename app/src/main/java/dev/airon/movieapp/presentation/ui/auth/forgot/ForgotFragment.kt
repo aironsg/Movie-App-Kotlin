@@ -1,9 +1,12 @@
 package dev.airon.movieapp.presentation.ui.auth.forgot
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateInterpolator
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -67,6 +70,7 @@ class ForgotFragment : Fragment() {
         if (email.isNotEmpty()) {
             if (email.isValidEmail()) {
                 forgot(email)
+
             } else {
                 showSnackBar(message = R.string.invalid_email)
             }
@@ -86,8 +90,11 @@ class ForgotFragment : Fragment() {
 
                 is StateView.Success -> {
                     binding.progressBar.isVisible = false
-                    showSnackBar(message = R.string.text_forgot_password_success)
-                    findNavController().navigate(R.id.action_forgotFragment_to_loginFragment)
+                    sendMail("E-mail enviado para $email")
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        showSnackBar(message = R.string.txt_send_email_success)
+                        findNavController().navigate(R.id.action_forgotFragment_to_loginFragment)
+                    }, 3000)
                 }
 
                 is StateView.Error -> {
@@ -97,6 +104,28 @@ class ForgotFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun sendMail(email: String) {
+        binding.flyingMailIcon.visibility = View.VISIBLE
+        val translationY = -binding.btnSend.y - binding.btnSend.height * 2
+
+        binding.flyingMailIcon
+            .animate()
+            .translationY(translationY)
+            .scaleX(0.5f)  // Reduz a escala no eixo X
+            .scaleY(0.5f)  // Reduz a escala no eixo Y
+            .alpha(0f)     // Desaparece gradualmente
+            .setInterpolator(AccelerateInterpolator()) // Efeito de aceleração
+            .setDuration(2500) // Duração mais longa para suavidade
+            .withEndAction {
+                binding.flyingMailIcon.visibility = View.INVISIBLE
+                binding.flyingMailIcon.alpha = 1f // Restaura opacidade
+                binding.flyingMailIcon.scaleX = 1f // Restaura escala
+                binding.flyingMailIcon.scaleY = 1f
+                binding.flyingMailIcon.translationY = 0f // Restaura posição
+            }
+            .start()
     }
 
     override fun onDestroyView() {
