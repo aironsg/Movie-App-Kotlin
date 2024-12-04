@@ -40,7 +40,6 @@ android {
         enable = true
     }
 }
-
 dependencies {
 
     implementation(libs.androidx.core.ktx)

@@ -12,6 +12,6 @@ import dev.airon.movieapp.domain.repository.auth.FirebaseAuthentication
 abstract class DomainModule {
 
     @Binds
-    abstract fun bindsFirebaseAuthenticationImpl(firebaseAuthImpl: FirebaseAuthenticationImpl) : FirebaseAuthentication
+    abstract fun firebaseAuthenticationImpl(firebaseAuthImpl: FirebaseAuthenticationImpl) : FirebaseAuthentication
 
 }
