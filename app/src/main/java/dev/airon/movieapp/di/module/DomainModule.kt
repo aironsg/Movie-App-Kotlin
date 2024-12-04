@@ -4,6 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.airon.movieapp.data.repository.auth.FirebaseAuthenticationImpl
 import dev.airon.movieapp.domain.repository.auth.FirebaseAuthentication
 
 @Module
@@ -11,6 +12,6 @@ import dev.airon.movieapp.domain.repository.auth.FirebaseAuthentication
 abstract class DomainModule {
 
     @Binds
-    abstract fun bindsFirebaseAuthenticationImpl(firebaseAuthImpl: FirebaseAuthentication) : FirebaseAuthentication
+    abstract fun firebaseAuthenticationImpl(firebaseAuthImpl: FirebaseAuthenticationImpl) : FirebaseAuthentication
 
 }

@@ -1,19 +1,24 @@
 package dev.airon.movieapp.presentation.ui.auth.register
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import dagger.hilt.EntryPoint
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.FragmentRegisterBinding
-import dev.airon.movieapp.domain.usecase.auth.RegisterUseCase
 import dev.airon.movieapp.presentation.viewmodel.register.RegisterViewModel
 import dev.airon.movieapp.utils.StateView
+import dev.airon.movieapp.utils.hideKeyboard
 import dev.airon.movieapp.utils.initToolbar
+import dev.airon.movieapp.utils.isValidEmail
+import dev.airon.movieapp.utils.isValidPassword
+import dev.airon.movieapp.utils.setupKeyboardDismissal
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
@@ -32,25 +37,48 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar(binding.toolbar)
+        view.setupKeyboardDismissal(this)
         initListener()
     }
 
     private fun initListener() {
-        binding.btnRegister.setOnClickListener { validateData() }
+        binding.btnRegister.setOnClickListener {
+            hideKeyboard()
+            validateData()
+        }
+        Glide.with(requireContext()).load(R.drawable.loading).into(binding.progressBar)
     }
 
     private fun validateData() {
         val email = binding.editEmail.text.toString().trim()
         val password = binding.edtPassword.text.toString()
 
-        if (email.isNotEmpty()) {
-            if (password.isNotEmpty()) {
+        binding.editEmail.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                binding.root.clearFocus()
+                hideKeyboard()
+            }
+        }
+        binding.edtPassword.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                binding.root.clearFocus()
+                hideKeyboard()
+            }
+        }
+
+        if (email.isNotEmpty() && email.isValidEmail()) {
+            if (password.isNotEmpty() && password.isValidPassword()) {
                 registerUser(email, password)
             } else {
-                Toast.makeText(requireContext(), "Preencha a senha", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "formato de senha inválido", Toast.LENGTH_SHORT)
+                    .show()
             }
         } else {
-            Toast.makeText(requireContext(), "Preencha o email", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                "formato de email inválido ou campo de email vazio",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -58,17 +86,21 @@ class RegisterFragment : Fragment() {
         registerViewModel.register(email, password).observe(viewLifecycleOwner) { stateView ->
             when (stateView) {
                 is StateView.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.isVisible = true
                 }
 
                 is StateView.Success -> {
-                    binding.progressBar.visibility = View.INVISIBLE
-                    Toast.makeText(requireContext(), "Usuario cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
-                    // TODO: navegar para tela HOME
+                    binding.progressBar.isVisible = false
+                    Toast.makeText(
+                        requireContext(),
+                        "Usuario cadastrado com sucesso!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
                 }
 
                 is StateView.Error -> {
-                    binding.progressBar.visibility = View.INVISIBLE
+                    binding.progressBar.isVisible = false
                     Toast.makeText(requireContext(), stateView.message, Toast.LENGTH_SHORT).show()
                 }
             }
