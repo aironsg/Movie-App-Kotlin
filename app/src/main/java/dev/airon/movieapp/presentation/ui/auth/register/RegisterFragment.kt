@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -70,24 +69,23 @@ class RegisterFragment : Fragment() {
             }
         }
 
-        if (!email.isValidEmail()){
-            showSnackBar(message = R.string.invalid_email_register_fragment)
-            return
-        }
-        if(email.isEmpty()){
+        if (email.isNotEmpty()) {
+            if (email.isValidEmail()) {
+                if (password.isNotEmpty()) {
+                    if (password.isValidPassword()) {
+                        registerUser(email, password)
+                    } else {
+                        showSnackBar(message = R.string.strong_password)
+                    }
+                } else {
+                    showSnackBar(message = R.string.text_password_empty)
+                }
+            } else {
+                showSnackBar(message = R.string.invalid_email)
+            }
+        } else {
             showSnackBar(message = R.string.text_email_empty)
-            return
         }
-        if (!password.isValidEmail()){
-            showSnackBar(message = R.string.strong_password_register_fragment)
-            return
-        }
-        if(password.isEmpty()){
-            showSnackBar(message = R.string.text_password_empty)
-            return
-        }
-
-        registerUser(email,password)
     }
 
     private fun registerUser(email: String, password: String) {
@@ -111,7 +109,6 @@ class RegisterFragment : Fragment() {
                 }
             }
         }
-
     }
 
     override fun onDestroyView() {

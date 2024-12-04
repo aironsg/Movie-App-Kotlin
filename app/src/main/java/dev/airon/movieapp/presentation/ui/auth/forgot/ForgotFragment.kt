@@ -1,11 +1,9 @@
 package dev.airon.movieapp.presentation.ui.auth.forgot
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,7 +13,6 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.FragmentForgotBinding
-import dev.airon.movieapp.presentation.MainActivity
 import dev.airon.movieapp.presentation.viewmodel.forgot.ForgotViewmodel
 import dev.airon.movieapp.utils.StateView
 import dev.airon.movieapp.utils.hideKeyboard
@@ -67,15 +64,15 @@ class ForgotFragment : Fragment() {
             }
         }
         hideKeyboard()
-        if (!email.isValidEmail()){
-            showSnackBar(message = R.string.invalid_email_register_fragment)
-            return
-        }
-        if(email.isEmpty()){
+        if (email.isNotEmpty()) {
+            if (email.isValidEmail()) {
+                forgot(email)
+            } else {
+                showSnackBar(message = R.string.invalid_email)
+            }
+        } else {
             showSnackBar(message = R.string.text_email_empty)
-            return
         }
-        forgot(email)
 
 
     }
