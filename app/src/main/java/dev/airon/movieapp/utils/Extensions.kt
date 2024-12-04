@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import dev.airon.movieapp.R
 
 //botão de retorno na toolbar
@@ -75,6 +76,11 @@ fun String.isValidEmail(): Boolean {
 fun String.isValidPassword(): Boolean {
     val passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$"
     return this.matches(Regex(passwordPattern))
+}
+
+//snackbar generica
+fun Fragment.showSnackBar(message: Int) {
+    Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
 }
 
 

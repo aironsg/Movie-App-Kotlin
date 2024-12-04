@@ -21,6 +21,7 @@
     <string name="text_email_empty_register_fragment">Digite um e-mail válido</string>
     <string name="text_password_empty_register_fragment">Digite uma senha</string>
     <string name="txt_divider">Ou continue com</string>
+    <string name="text_register_success">Usuário cadastrado com sucesso!</string>
 
     <!--    LoginFragment-->
     <string name="title_login_fragment">Faça login na sua conta</string>
@@ -29,13 +30,30 @@
     <string name="text_button_sign_in_login_fragment">Entrar</string>
     <string name="text_forgot_password_login_fragment">Esqueceu a senha?</string>
     <string name="text_continue_social_network_login_fragment">ou continuar com</string>
+    <string name="text_login_success">Login Realizado com sucesso!</string>
 
     <!--    ForgotFragment-->
     <string name="title_forgot_fragment">Crie sua nova senha</string>
     <string name="text_hint_edit_email_forgot_fragment">Email</string>
     <string name="text_button_forgot_fragment">Recuperar conta</string>
+    <string name="txt_send_email_success">E-mail enviado com sucesso!</string>
 
 
     <!--    Generics-->
     <string name="txt_or">Ou</string>
+    <string name="text_name_empty">Digite seu nome</string>
+    <string name="text_email_empty">O campo email não pode ser vazio</string>
+    <string name="text_phone_empty">Digite seu telefone</string>
+    <string name="text_phone_invalid">Digite um telefone válido</string>
+    <string name="text_password_empty">O campo senha não pode ser vazio</string>
+    <string name="strong_password_login_fragment">Senha incorreta, tente novamente.</string>
+    <string name="error_generic">Ocorreu um erro, por favor tente novamente mais tarde.</string>
+    <string name="text_formated_value">R$ %1$s</string>
+
+    <!--    Errors Firebase Authentication-->
+    <string name="account_incorrect">Credênciais da conta esta incorreta ou não existe. tente novamente!</string>
+    <string name="invalid_email">O formato do email está inválido.</string>
+    <string name="invalid_password">Senha inválida, tente novamente.</string>
+    <string name="email_in_use">Este e-mail já está em uso.</string>
+    <string name="strong_password">Senha fraca, ela deve conter pelo menos 6 caracteres, letras maiúsculas, minúsculas, números e caracteres especiais.</string>
 </resources>

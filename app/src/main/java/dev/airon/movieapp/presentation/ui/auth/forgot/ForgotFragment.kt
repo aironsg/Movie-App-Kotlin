@@ -1,13 +1,17 @@
 package dev.airon.movieapp.presentation.ui.auth.forgot
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.animation.AccelerateInterpolator
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import br.com.hellodev.netflix.util.FirebaseHelper
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import dev.airon.movieapp.R
@@ -18,6 +22,7 @@ import dev.airon.movieapp.utils.hideKeyboard
 import dev.airon.movieapp.utils.initToolbar
 import dev.airon.movieapp.utils.isValidEmail
 import dev.airon.movieapp.utils.setupKeyboardDismissal
+import dev.airon.movieapp.utils.showSnackBar
 
 @AndroidEntryPoint
 class ForgotFragment : Fragment() {
@@ -62,10 +67,15 @@ class ForgotFragment : Fragment() {
             }
         }
         hideKeyboard()
-        if (email.isValidEmail() && email.isNotEmpty()) {
-            forgot(email)
+        if (email.isNotEmpty()) {
+            if (email.isValidEmail()) {
+                forgot(email)
+
+            } else {
+                showSnackBar(message = R.string.invalid_email)
+            }
         } else {
-            binding.editEmail.error = "Formato de e-mail inválido"
+            showSnackBar(message = R.string.text_email_empty)
         }
 
 
@@ -80,20 +90,42 @@ class ForgotFragment : Fragment() {
 
                 is StateView.Success -> {
                     binding.progressBar.isVisible = false
-                    Toast.makeText(
-                        requireContext(),
-                        "email enviando com sucesso",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    sendMail("E-mail enviado para $email")
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        showSnackBar(message = R.string.txt_send_email_success)
+                        findNavController().navigate(R.id.action_forgotFragment_to_loginFragment)
+                    }, 3000)
                 }
 
                 is StateView.Error -> {
                     binding.progressBar.isVisible = false
-                    Toast.makeText(requireContext(), stateView.message, Toast.LENGTH_SHORT).show()
+                    showSnackBar(FirebaseHelper.validError(stateView.message ?: ""))
 
                 }
             }
         }
+    }
+
+    private fun sendMail(email: String) {
+        binding.flyingMailIcon.visibility = View.VISIBLE
+        val translationY = -binding.btnSend.y - binding.btnSend.height * 2
+
+        binding.flyingMailIcon
+            .animate()
+            .translationY(translationY)
+            .scaleX(0.5f)  // Reduz a escala no eixo X
+            .scaleY(0.5f)  // Reduz a escala no eixo Y
+            .alpha(0f)     // Desaparece gradualmente
+            .setInterpolator(AccelerateInterpolator()) // Efeito de aceleração
+            .setDuration(2500) // Duração mais longa para suavidade
+            .withEndAction {
+                binding.flyingMailIcon.visibility = View.INVISIBLE
+                binding.flyingMailIcon.alpha = 1f // Restaura opacidade
+                binding.flyingMailIcon.scaleX = 1f // Restaura escala
+                binding.flyingMailIcon.scaleY = 1f
+                binding.flyingMailIcon.translationY = 0f // Restaura posição
+            }
+            .start()
     }
 
     override fun onDestroyView() {
