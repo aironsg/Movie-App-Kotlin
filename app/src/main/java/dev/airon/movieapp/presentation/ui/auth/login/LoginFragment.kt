@@ -1,5 +1,6 @@
 package dev.airon.movieapp.presentation.ui.auth.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +10,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import br.com.hellodev.netflix.util.FirebaseHelper
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.FragmentLoginBinding
+import dev.airon.movieapp.presentation.MainActivity
 import dev.airon.movieapp.presentation.viewmodel.login.LoginViewModel
 import dev.airon.movieapp.utils.StateView
 import dev.airon.movieapp.utils.hideKeyboard
@@ -20,6 +23,7 @@ import dev.airon.movieapp.utils.initToolbar
 import dev.airon.movieapp.utils.isValidEmail
 import dev.airon.movieapp.utils.isValidPassword
 import dev.airon.movieapp.utils.setupKeyboardDismissal
+import dev.airon.movieapp.utils.showSnackBar
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -71,20 +75,24 @@ class LoginFragment : Fragment() {
             }
         }
 
-        if (email.isNotEmpty() && email.isValidEmail()) {
-            if (password.isNotEmpty() && password.isValidPassword()) {
-                login(email, password)
-            } else {
-                Toast.makeText(requireContext(), "formato de senha inválido", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        } else {
-            Toast.makeText(
-                requireContext(),
-                "formato de email inválido ou campo de email vazio",
-                Toast.LENGTH_SHORT
-            ).show()
+        if (!email.isValidEmail()){
+            showSnackBar(message = R.string.invalid_email_register_fragment)
+            return
         }
+        if(email.isEmpty()){
+            showSnackBar(message = R.string.text_email_empty)
+            return
+        }
+        if (!password.isValidEmail()){
+            showSnackBar(message = R.string.strong_password_register_fragment)
+            return
+        }
+        if(password.isEmpty()){
+            showSnackBar(message = R.string.text_password_empty)
+            return
+        }
+
+        login(email,password)
     }
 
     private fun login(email: String, password: String) {
@@ -97,11 +105,16 @@ class LoginFragment : Fragment() {
 
                 is StateView.Success -> {
                     binding.progressBar.isVisible = false
+                    showSnackBar(message = R.string.text_login_success)
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                    requireActivity().finish()
+
                 }
 
                 is StateView.Error -> {
                     binding.progressBar.isVisible = false
-                    Toast.makeText(requireContext(), stateView.message, Toast.LENGTH_SHORT).show()
+                    showSnackBar(FirebaseHelper.validError(stateView.message ?: ""))
+
                 }
             }
         }

@@ -39,7 +39,11 @@
             android:id="@+id/forgotFragment"
             android:name="dev.airon.movieapp.presentation.ui.auth.forgot.ForgotFragment"
             android:label="fragment_forgot"
-            tools:layout="@layout/fragment_forgot" />
+            tools:layout="@layout/fragment_forgot" >
+            <action
+                android:id="@+id/action_forgotFragment_to_loginFragment"
+                app:destination="@id/loginFragment" />
+        </fragment>
         <fragment
             android:id="@+id/loginFragment"
             android:name="dev.airon.movieapp.presentation.ui.auth.login.LoginFragment"
