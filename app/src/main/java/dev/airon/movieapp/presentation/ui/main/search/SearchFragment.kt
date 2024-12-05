@@ -1,24 +1,24 @@
-package dev.airon.movieapp.presentation.ui.home
+package dev.airon.movieapp.presentation.ui.main.search
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dev.airon.movieapp.R
-import dev.airon.movieapp.databinding.FragmentHomeBinding
+import androidx.fragment.app.Fragment
+import dev.airon.movieapp.databinding.FragmentSearchBinding
 
-class HomeFragment : Fragment() {
 
-    private var _binding : FragmentHomeBinding? = null
+class SearchFragment : Fragment() {
+
+    private var _binding : FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

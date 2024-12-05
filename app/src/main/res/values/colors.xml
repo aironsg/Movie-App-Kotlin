@@ -18,4 +18,11 @@
     <color name="home_register">#848383</color>
     <color name="color_edit_register">#F1F1F1</color>
     <color name="color_text_register">#212121</color>
+    <color name="success">#4ADE80</color>
+    <color name="info">#246BFD</color>
+    <color name="warning">#FACC15</color>
+    <color name="error">#F75555</color>
+    <color name="disabled">#D8D8D8</color>
+    <color name="disabled_button">#C1232F</color>
+
 </resources>

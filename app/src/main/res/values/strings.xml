@@ -55,5 +55,12 @@
     <string name="invalid_email">O formato do email está inválido.</string>
     <string name="invalid_password">Senha inválida, tente novamente.</string>
     <string name="email_in_use">Este e-mail já está em uso.</string>
-    <string name="strong_password">Senha fraca, ela deve conter pelo menos 6 caracteres, letras maiúsculas, minúsculas, números e caracteres especiais.</string>
+    <string name="strong_password">Sua ela deve conter pelo menos 6 caracteres, letras maiúsculas, minúsculas, números e caracteres especiais.</string>
+
+    <!--    BottomBar-->
+    <string name="title_menu_home">Início</string>
+    <string name="title_menu_search">Pesquisar</string>
+    <string name="title_menu_favorite">Favorite</string>
+    <string name="title_menu_download">Baixar</string>
+    <string name="title_menu_profile">Perfil</string>
 </resources>
