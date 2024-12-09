@@ -14,7 +14,6 @@ class FirebaseAuthenticationImpl @Inject constructor (private val auth: Firebase
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     continuation.resumeWith(Result.success(Unit))
-                    TODO("transferir ususario para a tela HOME")
                 } else {
                     task.exception?.let {
                         continuation.resumeWith(Result.failure(it))
@@ -30,7 +29,6 @@ class FirebaseAuthenticationImpl @Inject constructor (private val auth: Firebase
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     continuation.resumeWith(Result.success(Unit))
-                    TODO("transferir ususario para a tela HOME")
                 } else {
                     task.exception?.let {
                         continuation.resumeWith(Result.failure(it))

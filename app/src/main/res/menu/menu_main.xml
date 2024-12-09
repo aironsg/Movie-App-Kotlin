@@ -4,27 +4,38 @@
     <item android:id="@+id/menu_home"
         android:title="@string/title_menu_home"
         android:icon="@drawable/ic_menu_home"
-        android:orderInCategory="1" />
+        android:orderInCategory="1"
+        android:iconTint="@color/color_default"
+        android:titleTextColor="@color/color_default"
+        />
 
     <item android:id="@+id/menu_search"
         android:title="@string/title_menu_search"
         android:icon="@drawable/ic_menu_search"
-        android:orderInCategory="2" />
+        android:orderInCategory="2"
+        android:iconTint="@color/color_default"
+        android:titleTextColor="@color/color_default"/>
 
     <item android:id="@+id/menu_favorite"
         android:title="@string/title_menu_favorite"
         android:icon="@drawable/ic_menu_favorite"
-        android:orderInCategory="3" />
+        android:orderInCategory="3"
+        android:iconTint="@color/color_default"
+        android:titleTextColor="@color/color_default"/>
 
     <item android:id="@+id/menu_download"
         android:title="@string/title_menu_download"
         android:icon="@drawable/ic_menu_download"
-        android:orderInCategory="4" />
+        android:orderInCategory="4"
+        android:iconTint="@color/color_default"
+        android:titleTextColor="@color/color_default"/>
 
     <item android:id="@+id/menu_profile"
         android:title="@string/title_menu_profile"
         android:icon="@drawable/ic_menu_profile"
-        android:orderInCategory="5" />
+        android:orderInCategory="5"
+        android:iconTint="@color/color_default"
+        android:titleTextColor="@color/color_default"/>
 
 
 </menu>
