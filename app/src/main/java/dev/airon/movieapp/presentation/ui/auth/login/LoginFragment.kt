@@ -2,7 +2,6 @@ package dev.airon.movieapp.presentation.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.FragmentLoginBinding
-import dev.airon.movieapp.presentation.MainActivity
+import dev.airon.movieapp.presentation.ui.main.activity.MainActivity
 import dev.airon.movieapp.presentation.viewmodel.login.LoginViewModel
 import dev.airon.movieapp.utils.StateView
 import dev.airon.movieapp.utils.hideKeyboard

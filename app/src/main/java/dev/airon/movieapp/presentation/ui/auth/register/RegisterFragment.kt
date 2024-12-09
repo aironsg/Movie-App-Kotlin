@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.FragmentRegisterBinding
-import dev.airon.movieapp.presentation.MainActivity
+import dev.airon.movieapp.presentation.ui.main.activity.MainActivity
 import dev.airon.movieapp.presentation.viewmodel.register.RegisterViewModel
 import dev.airon.movieapp.utils.StateView
 import dev.airon.movieapp.utils.hideKeyboard
