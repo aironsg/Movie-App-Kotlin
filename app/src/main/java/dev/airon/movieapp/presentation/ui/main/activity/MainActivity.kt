@@ -7,9 +7,9 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
+import dev.airon.movieapp.BuildConfig
 import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.ActivityMainBinding
-import dev.airon.movieapp.presentation.ui.auth.forgot.ForgotFragment
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity() {
         //installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
         initNavigation()
+
+
     }
 
     private fun initNavigation() {
