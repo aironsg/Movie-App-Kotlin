@@ -1,15 +1,15 @@
 package dev.airon.movieapp.data.mapper
 
-import dev.airon.movieapp.data.model.dto.GenreDTO
-import dev.airon.movieapp.data.model.dto.MovieDTO
+import dev.airon.movieapp.data.model.response.GenreResponse
+import dev.airon.movieapp.data.model.response.MovieResponse
 import dev.airon.movieapp.domain.model.Genre
 import dev.airon.movieapp.domain.model.Movie
 
-fun GenreDTO.toDomain(): Genre {
+fun GenreResponse.toDomain(): Genre {
     return Genre(id = id, name = name)
 }
 
-fun MovieDTO.toDomain(): Movie{
+fun MovieResponse.toDomain(): Movie{
     return Movie(
         adult = adult,
         backdropPath =backdropPath,

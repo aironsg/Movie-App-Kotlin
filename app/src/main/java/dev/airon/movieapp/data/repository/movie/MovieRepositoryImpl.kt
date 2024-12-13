@@ -1,10 +1,9 @@
 package dev.airon.movieapp.data.repository.movie
 
 import dev.airon.movieapp.data.datasource.remote.api.ServiceAPI
-import dev.airon.movieapp.data.model.GenresResponse
-import dev.airon.movieapp.data.model.dto.MovieDTO
+import dev.airon.movieapp.data.model.response.GenresResponse
+import dev.airon.movieapp.data.model.response.MovieResponse
 import dev.airon.movieapp.domain.repository.movie.MovieRepository
-import dev.airon.movieapp.utils.Constants
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(private val serviceAPI: ServiceAPI) :  MovieRepository {
@@ -20,7 +19,7 @@ class MovieRepositoryImpl @Inject constructor(private val serviceAPI: ServiceAPI
         apiKey: String,
         language: String?,
         genreId: Int?
-    ): List<MovieDTO> {
+    ): List<MovieResponse> {
         return serviceAPI.getMoviesByGenre(
             apiKey = apiKey,
             language = language,

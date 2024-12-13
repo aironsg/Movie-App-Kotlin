@@ -1,9 +1,9 @@
-package dev.airon.movieapp.data.model.dto
+package dev.airon.movieapp.data.model.response
 
 import com.google.gson.annotations.SerializedName
 
 
-data class MovieDTO(
+data class MovieResponse(
 
     @SerializedName("adult")
     val adult: Boolean?,

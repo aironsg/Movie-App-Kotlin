@@ -1,8 +1,7 @@
 package dev.airon.movieapp.domain.repository.movie
 
-import dev.airon.movieapp.data.model.BasePaginationRemote
-import dev.airon.movieapp.data.model.GenresResponse
-import dev.airon.movieapp.data.model.dto.MovieDTO
+import dev.airon.movieapp.data.model.response.GenresResponse
+import dev.airon.movieapp.data.model.response.MovieResponse
 
 interface MovieRepository {
 
@@ -13,5 +12,5 @@ interface MovieRepository {
         apiKey: String,
         language: String?,
         genreId: Int?
-    ): List<MovieDTO>
+    ): List<MovieResponse>
 }
