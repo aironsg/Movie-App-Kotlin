@@ -5,11 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dagger.hilt.android.AndroidEntryPoint
 import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.FragmentFavoriteBinding
 import dev.airon.movieapp.databinding.FragmentProfileBinding
 
-
+@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
     private var _binding : FragmentFavoriteBinding? = null
     private val binding get() = _binding!!

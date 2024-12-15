@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.airon.movieapp.databinding.FragmentDownloadBinding
 
-
+@AndroidEntryPoint
 class DownloadFragment : Fragment() {
     private var _binding : FragmentDownloadBinding? = null
     private val binding get() = _binding!!

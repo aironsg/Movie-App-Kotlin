@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.airon.movieapp.databinding.FragmentProfileBinding
 
-
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private var _binding : FragmentProfileBinding? = null
     private val binding get() = _binding!!
