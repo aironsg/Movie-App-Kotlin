@@ -1,14 +1,17 @@
 package dev.airon.movieapp.presentation.ui.auth.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import br.com.hellodev.netflix.util.FirebaseHelper
 import dagger.hilt.android.AndroidEntryPoint
 import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.ActivityAuthenticationBinding
+import dev.airon.movieapp.presentation.ui.main.activity.MainActivity
 
 @Suppress("DEPRECATION")
 @AndroidEntryPoint
@@ -26,6 +29,7 @@ class AuthenticationActivity : AppCompatActivity() {
         setContentView(binding.root)
         setStatusBarTranslucent()
         initNavigation()
+        isAuthentication()
     }
 
     //responsavel por deixar a status bar em forma full com o restante da tela
@@ -45,6 +49,13 @@ class AuthenticationActivity : AppCompatActivity() {
             if (destination.id != R.id.onboardingFragment) {
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
+        }
+    }
+
+    private fun isAuthentication(){
+        if (FirebaseHelper.isAuthenticated()){
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 

@@ -17,7 +17,7 @@
         <activity
             android:name=".presentation.ui.auth.activity.AuthenticationActivity"
             android:exported="true"
-            android:theme="@style/Theme.MovieApp.AuthTheme"
+
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
