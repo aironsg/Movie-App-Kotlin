@@ -15,6 +15,7 @@ import dev.airon.movieapp.presentation.adapter.home.GenreMovieAdapter
 import dev.airon.movieapp.presentation.model.GenrePresentation
 import dev.airon.movieapp.presentation.viewmodel.home.HomeViewModel
 import dev.airon.movieapp.utils.StateView
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -67,6 +68,7 @@ class HomeFragment : Fragment() {
 
                     is StateView.Success -> {
                         genreMutableList[index] = genre.copy(moveis = stateView.data)
+                        
                         lifecycleScope.launch {
                             delay(1000)
                             genreMovieAdapter.submitList(genreMutableList)

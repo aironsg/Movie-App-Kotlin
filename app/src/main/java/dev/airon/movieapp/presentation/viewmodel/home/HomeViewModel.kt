@@ -48,7 +48,6 @@ class HomeViewModel @Inject constructor(
                 language = LANGUAGE,
                 genreId =  genreId
             )
-
             emit(StateView.Success(data = movies))
         }catch (e: HttpException){
             e.printStackTrace()
