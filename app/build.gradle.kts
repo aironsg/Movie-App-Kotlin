@@ -54,8 +54,18 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
+    //retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+
+    //OKHTTP
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+
     //Splash API
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.androidx.core.splashscreen)
 
     //Test
     testImplementation(libs.junit)

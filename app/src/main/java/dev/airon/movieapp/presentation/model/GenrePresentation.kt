@@ -5,8 +5,8 @@ import dev.airon.movieapp.domain.model.Movie
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class GenrePresetation(
-    val id: Int?,
+data class GenrePresentation(
+    val id: Int,
     val name: String?,
     val moveis: List<Movie>?
 ) : Parcelable

@@ -26,7 +26,7 @@
         android:textColor="@color/color_default"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/txt_show_all_movie" />
+        android:text="@string/txt_show_all_movie" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_movie"

@@ -7,24 +7,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.airon.movieapp.databinding.GenreItemBinding
-import dev.airon.movieapp.presentation.model.GenrePresetation
+import dev.airon.movieapp.presentation.model.GenrePresentation
 
 class GenreMovieAdapter :
-    ListAdapter<GenrePresetation, GenreMovieAdapter.MyViewHolder>(DIFF_CALLBACK) {
+    ListAdapter<GenrePresentation, GenreMovieAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<GenrePresetation>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<GenrePresentation>() {
 
             override fun areItemsTheSame(
-                oldItem: GenrePresetation,
-                newItem: GenrePresetation
+                oldItem: GenrePresentation,
+                newItem: GenrePresentation
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: GenrePresetation,
-                newItem: GenrePresetation
+                oldItem: GenrePresentation,
+                newItem: GenrePresentation
             ): Boolean {
                 return oldItem.id == newItem.id
             }
