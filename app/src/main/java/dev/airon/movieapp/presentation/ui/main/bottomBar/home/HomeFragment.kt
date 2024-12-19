@@ -1,21 +1,21 @@
-package dev.airon.movieapp.presentation.ui.main.home
+package dev.airon.movieapp.presentation.ui.main.bottomBar.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.EntryPoint
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import dev.airon.movieapp.R
 import dev.airon.movieapp.databinding.FragmentHomeBinding
 import dev.airon.movieapp.presentation.adapter.home.GenreMovieAdapter
 import dev.airon.movieapp.presentation.model.GenrePresentation
 import dev.airon.movieapp.presentation.viewmodel.home.HomeViewModel
 import dev.airon.movieapp.utils.StateView
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -40,17 +40,25 @@ class HomeFragment : Fragment() {
         //initListener()
         initRecycler()
         getGenres()
-    }
-
-    private fun initListener() {
 
     }
+
+
 
     private fun initRecycler() {
-        genreMovieAdapter = GenreMovieAdapter()
+        genreMovieAdapter = GenreMovieAdapter{ genreId ->
+            val action = HomeFragmentDirections.actionMenuHomeToMovieGenreFragment(genreId)
+            findNavController().navigate(action)
+
+        }
         with(binding.recyclerGenres) {
             setHasFixedSize(true)
             adapter = genreMovieAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            post {
+                invalidate()
+                requestLayout()
+            }
         }
     }
 
@@ -63,19 +71,23 @@ class HomeFragment : Fragment() {
             viewModel.getMovieByGenre(genre.id).observe(viewLifecycleOwner) { stateView ->
                 when (stateView) {
                     is StateView.Loading -> {
-                        //binding.progressBar.visibility = View.VISIBLE
+                        binding.progressBar.isVisible = true
                     }
 
                     is StateView.Success -> {
+                        binding.progressBar.isVisible = false
                         genreMutableList[index] = genre.copy(moveis = stateView.data?.take(6))
-                        
+
                         lifecycleScope.launch {
                             delay(1000)
-                            genreMovieAdapter.submitList(genreMutableList)
+                            genreMovieAdapter.submitList(genreMutableList.toList())
                         }
                     }
 
-                    is StateView.Error -> {}
+                    is StateView.Error -> {
+
+                            binding.progressBar.isVisible = false
+                    }
                 }
 
             }
@@ -83,24 +95,32 @@ class HomeFragment : Fragment() {
 
     }
 
+
+
     private fun getGenres() {
 
         viewModel.getGenres().observe(viewLifecycleOwner) { stateView ->
             when (stateView) {
                 is StateView.Loading -> {
-                    //binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.isVisible = true
                 }
 
                 is StateView.Success -> {
-                    val genres = stateView.data
-                    genreMovieAdapter.submitList(genres)
-                    getMovieByGenre(genres ?: emptyList())
+                    binding.progressBar.isVisible = false
+                    val genres = stateView.data ?: emptyList()
+                    genreMovieAdapter.submitList(genres) // Envia uma lista inicial vazia ou apenas os gêneros
+                    getMovieByGenre(genres)
                 }
 
                 is StateView.Error -> {}
             }
 
         }
+        binding.recyclerGenres.post {
+            binding.recyclerGenres.scrollToPosition(0)
+            binding.recyclerGenres.visibility = View.VISIBLE
+        }
+
     }
 
     override fun onDestroy() {

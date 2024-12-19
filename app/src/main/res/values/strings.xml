@@ -64,7 +64,7 @@
     <string name="title_menu_download">Baixar</string>
     <string name="title_menu_profile">Perfil</string>
 
-<!--    Genre Movies-->
+    <!--    Genre Movies-->
     <string name="genre_adventure">Aventura</string>
     <string name="genre_action">Ação</string>
     <string name="genre_comedy">Comédia</string>

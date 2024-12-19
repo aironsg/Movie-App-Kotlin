@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.airon.movieapp.databinding.GenreItemBinding
 import dev.airon.movieapp.presentation.model.GenrePresentation
 
-class GenreMovieAdapter :
+class GenreMovieAdapter(private val showAllListener: (Int) -> Unit) :
     ListAdapter<GenrePresentation, GenreMovieAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
     companion object {
@@ -49,6 +49,9 @@ class GenreMovieAdapter :
         holder.binding.genreMovie.text = genre.name
         val movieAdapter = MovieAdapter(context)
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        holder.binding.showAllMovie.setOnClickListener {
+            genre.id?.let { showAllListener(it) }
+        }
         holder.binding.recyclerMovie.layoutManager = layoutManager
         holder.binding.recyclerMovie.setHasFixedSize(true)
         holder.binding.recyclerMovie.adapter = movieAdapter

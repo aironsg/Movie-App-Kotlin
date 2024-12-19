@@ -1,4 +1,4 @@
-package dev.airon.movieapp.presentation.ui.main.search
+package dev.airon.movieapp.presentation.ui.main.bottomBar.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
